@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="account-info">
+            <img class="account-img" src="{{ image_file }}">
+            <div class="info">
+                <h2 class="account-heading">{{ current_user.username }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+            <form method="POST" action= "" enctype = "multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset class= "form-group" >
+                    <h4>Account Info</h4>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="username">User Name</label>
+                    
+                        {% if form.username.errors %}
+                            {{ form.username( class= "is-invalid") }}
+                            <div class= "invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span> {{ error }} </span>
+                                {% endfor %}                     
+                            </div>
+    
+                        {% else %}
+                            <input class="form-control" id="username" name="username" value = {{form.username.data}}>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email</label>
+                        {% if form.email.errors %}
+                            {{ form.email( class= "is-invalid") }}
+                            <div class= "invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span> {{ error }} </span>
+                                {% endfor %}                     
+                            </div>
+    
+                        {% else %}
+                            <input class="form-control" id="email" name="email" value = {{form.email.data}}>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="picture">Profile Picture</label>
+                        <input class= "file_upload" type="file" id="picture" name="picture" accept="image/png, image/jpeg, image/jpg">
+                        {% if form.picture.errors %}
+                            {% for error in form.picture.errors %}
+                                <span class= "invalid-feedback"> {{ error }} </span>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="submit">Update</button>
+                </div>
+            </form>        
+
+    </div>
+{% endblock content %}

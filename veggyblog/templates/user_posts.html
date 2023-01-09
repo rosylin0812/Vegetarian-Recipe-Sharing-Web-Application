@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="heading">
+        <img class="account-img" src="{{ image_file }}">
+        <div class="info">
+            <h2 class="account-heading">{{ user.username}}</h2>
+            <p class="text-secondary">{{posts.total}} posts</p>
+        </div>
+        
+        <div class='follow-btn'>
+            {% if current_user.is_authenticated and user.id != current_user.id %}
+                    {% if current_user.is_following(user) %}
+                        <div class = 'dropdown'>
+                            <button onclick="dropDown()" class='following'>Following
+                                <img src="/static/images/down-arrow.png" style ="margin-left:0.5px;"></button>
+
+                            <div id="following-dropdown" class="dropdown-content">
+                                <a href="{{ url_for('main.unfollow', user_id=user.id) }}" method = "POST">Unfollow</a>
+                            </div>
+                            <script>
+                                // When the user clicks on the button, toggle between hiding and showing the dropdown content
+                                function dropDown() {
+                                  document.getElementById("following-dropdown").classList.toggle("show");
+                                }
+                                
+                                // Close the dropdown if the user clicks outside of it
+                                window.onclick = function(event) {
+                                  if (!event.target.matches('.following')) {
+                                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                                    var i;
+                                    for (i = 0; i < dropdowns.length; i++) {
+                                      var openDropdown = dropdowns[i];
+                                      if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                      }
+                                    }
+                                  }
+                                }
+                            </script>
+                        </div>
+                            
+                    {% else %}
+                        <a href="{{ url_for('main.follow', user_id=user.id) }}"  method= "POST"><button class='follow'>Follow</button></a>
+                    {% endif %}            
+            {% endif %}
+        </div>
+    </div>
+    {% for post in posts.items %}
+        <article class= "media content-section">
+
+            <div class="media-body">
+                <img src="{{ url_for('static', filename= 'profile_pics/' + post.author.image_file) }}">
+                <div class="article-metadata">
+                    <a class= "mr-2" href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
+                    <small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small>
+                </div>
+            </div>
+
+            <h2><a class="article-title" href="{{url_for('posts.post', post_id = post.id)}}"> {{post.title}} </a></h2>
+            <a class="article-content">{{post.content}}</a>
+
+        </article>  
+    {% endfor %}
+    <div class='pagination'>
+        
+        <!--{% if posts.has_prev %}
+            <button href="{{posts.prev()}}"><</a>
+        {% endif %}-->
+        {% for page_num in posts.iter_pages(left_edge=2, right_edge=2, left_current= 1, right_current= 2) %}
+            
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                    <a class = 'current-page-btn' href="{{ url_for('users.user_posts', username=user.username, page=page_num)}}">{{ page_num }}</a>
+                {% else %}
+                    <a class = 'page-btn' href="{{ url_for('users.user_posts', username=user.username, page=page_num)}}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                <a class = 'page-btn'>...</a>
+            {% endif %}
+            
+        {% endfor %}
+        <!--<a href="{{url_for('main.home', posts=posts.next(error_out=False))}}">></a>-->
+    </div>
+{% endblock content %}

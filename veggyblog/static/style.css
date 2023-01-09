@@ -1,0 +1,801 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    background: #dfdfdf;
+}
+
+/* -- Navigate bar button font --*/
+button.login{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #f0f0f0;
+    text-decoration: none;
+}
+button.signup{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #7e955f;
+    text-decoration: none;
+}
+/* -- end Navigate bar button font --*/
+
+/* ------------------ nav bar ---------------------*/
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fefefe;
+    padding: 9.5px 2.5%;
+    position: sticky;
+    top:0;
+    z-index: 100;
+}
+.logo{
+    width: 120px;
+    cursor: pointer;
+}
+/* --- nav middle ---*/
+.search-box{
+    background: #efefef;
+    width: 500px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.search-box img{
+    margin-top: 10px;
+    width: 35px;
+    margin-bottom: 10px;
+}
+
+.search-box input{
+    width: 100%;
+    background:transparent ;
+    padding: 10px;
+    outline: none;
+    border:0;
+    font-size: 22px;
+}
+
+/* --- nav right ---*/
+button.login{
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: #7e955f;
+    border-radius: 50px;
+    border: 2.5px solid #7e955f;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    position: sticky;
+}
+button.signup{
+    padding: 9px 25px;
+    background-color: #f0f0f0;
+    border-radius: 50px;
+    border: 2.5px solid #7e955f;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button.login:hover{
+    background-color: #95aa79;
+}
+
+button.signup:hover{
+    background-color: #d9e1cf;
+}
+/* ------------------ end nav bar ---------------------*/
+
+.container{
+    display:flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+    position: relative;
+}
+
+/* ------------------ left ---------------------*/
+.left-sidebar a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: rgb(35, 35, 35);
+    text-decoration: none;
+}
+
+.imp-links button{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 150px;
+    height: 60px;
+    color:#3b3b3b;
+    background-color: #dfdfdf;
+    border-radius: 20px;
+    border: 1px solid #dfdfdf;
+    font-size: 20px;
+}
+.imp-links button:hover{
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    border: 1px solid #f3f3f3;
+    cursor: pointer;
+}
+
+.imp-links button img{
+    width:42px;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.left-sidebar{
+    margin-top: 32px;
+    flex-basis: 18%;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+}
+/* ------------------ end left ---------------------*/
+
+/* ------------------ right ---------------------*/
+.right-sidebar{
+    margin-top: 30px;
+    flex-basis: 24%;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+.sidebar-title{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+}
+.sidebar-title h4{
+    font-weight: 600;
+    font-size: 18px;
+    color:#626262;
+}
+
+.sidebar-title a{
+    text-decoration: none;
+    color:#607247;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.event{
+    display:flex;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.left-event {
+    color: #6d653c;
+    margin-top: 10px;
+    border-radius: 10px;
+    height: 65px;
+    width: 65px;
+    margin-right: 15px;
+    padding-top: 15px;
+    text-align:center;
+    position:relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba( 0, 0, 0, 0.1);
+}
+.right-event {
+    margin-top: 10px;
+    width: 350px;
+    color:#626262;
+}
+.event p{
+    font-size: 16px;
+    padding-top: 4px;
+}
+.event a{
+    font-size: 16px;
+    text-decoration: none;
+    color:#607247;
+    padding-top: 10px 5%;
+}
+
+.left-event span{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #607247;
+    color: #fff;
+    font-size: 14px;
+    padding: 4px 0;
+}
+/* ------------------ end right ---------------------*/
+
+/* ------------------ main content ---------------------*/
+.main-content{
+    flex-basis: 50%;
+    padding: 10px;
+    
+}
+.alert_success{
+    background: rgb(230, 246, 250);
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    display: flex;
+}
+.alert_success a{
+    font-size: 20px;
+    color:#2e5c97;
+    align-items: center;
+    margin-left: 20px;
+}
+.alert_danger{
+    background: rgb(250, 230, 237);
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    display: flex;
+}
+.alert_danger a{
+    font-size: 20px;
+    color:#bb3030;
+    align-items: center;
+    margin-left: 20px;
+}
+.form-group .invalid-feedback span{
+    font-size: 16px;
+    color: #bb3030;
+    margin-left: 38px;
+}
+.form-group .is-invalid{
+    margin-left: 20px;
+    position: relative;
+    top: 10px;
+    margin-bottom: 20px;
+    left: 14px;
+    height: 50px;
+    width: 100%;
+    border: 1px solid #bb3030;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 0 20px;
+    outline: none;
+    background: #f3f3f3;
+    z-index: 1;
+}
+.content-section {
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    columns: #626262;
+    margin: 20px 0;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.media-body{
+    display: flex;
+    align-items: center;
+}
+.media-body img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+/* save button */
+
+.save-button img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.article-metadata a, small{
+    text-decoration: none;
+    display: flex;
+    margin-right:10px;
+}
+.article-metadata a{
+    
+    font-size: 22px;
+    color: #626262;
+}
+.article-metadata a:hover{
+    text-decoration: underline;
+}
+.article-metadata small{
+    font-size: 14px;
+    color: #626262;
+} 
+.article-title{
+    font-weight: 600;
+    color: #626262;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.article-title:hover{
+    font-weight: 600;
+    color: #3c7cd1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.content-section .article-content{
+    width: 700px;
+    white-space:break-spaces;
+}
+.content-section h4{
+    font-size: 30px;
+    color: #607247;
+    align-items: center;
+    margin-bottom: 25px;
+    display: flex;
+    margin-left: 36px;
+    margin-top: 10px;
+}
+.form-group {
+    position: relative;
+    height: 100%;
+    width: 90%;
+    margin-bottom: 17px;
+    border:transparent;
+  }
+.form-group label{
+    margin-left: 20px;
+    padding: 0 15px;
+    font-size: 20px;
+    color: #626262;   
+}
+.form-group input {
+    margin-left: 20px;
+    position: relative;
+    top: 10px;
+    margin-bottom: 20px;
+    left: 14px;
+    height: 50px;
+    width: 100%;
+    border: 1px solid #DADCE0;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 0 20px;
+    outline: none;
+    background: #f3f3f3;
+    z-index: 1;
+}
+::placeholder {
+    color: #626262;
+}
+button.submit{
+    margin-left: 36px;
+    padding: 9px 25px;
+    background-color: #7e955f;
+    border-radius: 20px;
+    border: 1px solid #7e955f;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+
+    color:#fefefe;
+    font-size: 20px;
+}
+button.submit:hover{
+    background-color: #95aa79;
+}
+.to_login_in p{
+    color:#626262;
+    font-size: 18px;
+    margin-left: 55px;
+}
+.to_login_in a{
+    color: #3e82dc;
+    font-size: 19px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+/* ----- log in page ------*/
+.form-check{
+    padding: 0px;
+    display: flex;
+    align-items:center;
+    height: 40px;
+}
+.form-check .form-check-input{
+    margin-left: 30px;
+    width: auto;
+}
+.form-check .form-check-label{
+    display: flex;
+    font-size: 18px;
+}
+.login_button a{
+    font-size: 18px;
+    margin-left: 400px;
+    color: #3c7cd1;
+}
+
+/* ------------------ end main content ---------------------*/
+/* ------------------ account info ---------------------*/
+.account-info {
+    padding: 20px 0px 20px 28px;
+    display: flex;
+    align-items: center;
+}
+
+.account-info .info {
+    position:relative;
+    overflow: hidden;
+    margin-left: 20px;
+}
+.account-img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.info h2{
+    text-decoration: none;
+    font-size: 36px;
+}
+.info p{
+    margin-top: 5px;
+    text-decoration: none;
+    font-size: 20px;
+}
+.form-group input.file_upload{
+    position:unset;
+    height: 40px;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+    background:transparent ;
+    outline: none;
+    border: 0;
+}
+input[type="file"]::file-selector-button {
+    border: 2px solid #a6abb0;
+    padding: 0.2em 0.4em;
+    border-radius: 0.5em;
+    background-color: #a6abb0;
+    transition: 1s;
+  }
+input[type="file"]::file-selector-button:hover {
+    background-color: #c8ccd0;
+    border: 2px solid #c8ccd0;
+}
+.form-group span{
+    font-size: 16px;
+    color: #bb3030;
+    margin-left: 38px;
+}
+/* ------------------ end account info ---------------------*/
+/* ------------------ create/update/delte post  ---------------------*/
+.form-group textarea{
+    position: relative;
+    margin-left: 22px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    top: 10px;
+    left: 14px;
+    height: 250px;
+    width: 100%;
+    border: 1px solid #DADCE0;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 12px 20px;
+    outline: none;
+    background: #f3f3f3;
+    z-index: 1;
+    resize: none;
+    font-size: 18px;
+    min-height: 100px;
+}
+
+/* The Modal (background) */
+.deletemodal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background: #e7e8ea86;
+    
+}
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 28%; /* Could be more or less, depending on screen size */
+    height:auto;
+    border: 1px solid #DADCE0;
+    border-radius: 18px;
+  }
+
+.cancelbtn{
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: #dbdbdb;
+    border-radius: 50px;
+    border: 2.5px solid #dbdbdb;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    position: sticky;
+    color: #333333;
+    font-size: 18px;
+}
+.deletebtn{
+    padding: 9px 25px;
+    background-color: #bb3030;
+    border-radius: 50px;
+    border: 2.5px solid #bb3030;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    color: #f9f9f9;
+    font-size: 18px;
+}
+.text h1, .text p{
+    padding-bottom: 25px;
+    margin: 0px 10px 10px 10px;
+    text-align:center;
+    position:relative;
+}
+
+.modal-btn{
+    display: flex;
+    justify-content:space-around;
+    margin: 10px 10px 10px 10px;
+}
+.update-post{
+    padding: 9px 25px;
+    background-color: #8da272;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    position: sticky;
+    color: #f9f9f9;
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+.delete-post{
+    padding: 9px 25px;
+    background-color: #bb3030;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    position: sticky;
+    color: #f9f9f9;
+    font-size: 16px;
+    margin-top: 20px;
+}
+/* ------------------ end create/update/delte post  ---------------------*/
+/* ------------------ pagination  ---------------------*/
+.pagination {
+    display: inline-flex;
+    margin-left: 33%;
+}
+  
+.pagination a.page-btn {
+    background-color: #d2d2d2;
+    color: black;
+    float: left;
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+  
+.pagination a.current-page-btn {
+    background-color:#607247;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.pagination a.current-page-btn:hover {
+    background-color: #7e955f;
+    border-radius: 8px;
+}
+.pagination a:hover:not(.current-page-btn) {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+/* ------------------ end pagination  ---------------------*/
+/* ------------------ individual user's posts  ---------------------*/
+.heading {
+    padding: 20px 0px 20px 28px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.heading .info {
+    position:relative;
+    overflow: hidden;
+    margin-left: 20px;
+}
+/* for follow button */
+.follow-btn {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.follow-btn button.follow{
+    text-decoration: none;
+    width: 140px;
+    height: 45px;
+    color:#fdfdfd;
+    background-color: #0095F6;
+    border-radius: 20px;
+    border: 2.5px solid #0095F6;
+    font-size: 20px;
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+}
+.follow-btn button.follow:hover{
+    background-color: #1877f2;
+    border-radius: 20px;
+    border: 2.5px solid #1877f2;
+    cursor: pointer;
+}
+
+.follow-btn button.following{
+    text-decoration: none;
+    width: 140px;
+    height: 45px;
+    color:#111111;
+    background-color: #efefef;
+    border-radius: 20px;
+    border: 2.5px solid #efefef;
+    font-size: 20px;
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+}
+.follow-btn button.following:hover{
+    background-color: #dbdbdb;
+    border-radius: 20px;
+    border: 2.5px solid #dbdbdb;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 140px;
+    height: 45px;
+    color:#111111;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+.dropdown-content a {
+    color: rgb(234, 7, 7);
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    padding: 8px 28px;
+  }
+.dropdown a:hover {
+    background-color: #f5f5f5;
+    width: 140px;
+    height: 45px;
+    border-radius: 20px;
+    border: 1px solid #f5f5f5;
+}
+
+.show {display: block;}
+/* ------------------ end individual user's posts  ---------------------*/
+
+.account-btn button.account{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: auto;
+    height: 50px;
+    color:#111111;
+    background-color: #efefef;
+    border-radius: 30px;
+    border: 2.5px solid #efefef;
+    font-size: 20px;
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    padding: 26px 8px;
+}
+.account-btn button.account:hover{
+    width: auto;
+    height: 50px;
+    background-color: #dbdbdb;
+    border-radius: 30px;
+    border: 2.5px solid #dbdbdb;
+    cursor: pointer;
+}
+
+.account-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 10px;
+    min-width: 360px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 50px;
+  }
+  
+.account-dropdown-content a.account, a.logout {
+    display: flex;
+    justify-content: center;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+
+  }
+.account-dropdown-content a.account:hover, a.logout:hover {
+    background-color: #f5f5f5;
+    min-width: 360px;
+    height: 50px;
+}
+.show {display: block;}
+
+
+.p-footer-linkList {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-left:10px;
+    margin-right:10px;
+    padding: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    
+}
+
+.p-footer-linkList>li a {
+    padding: 6px;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    color: #9a9a9a;
+}
+
+.p-footer-linkList>li a:hover:not( .copyright){
+    text-decoration: underline;
+}

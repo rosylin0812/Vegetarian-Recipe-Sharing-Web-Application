@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="heading">
+        <div class = "top">
+            <div class="info">
+                <h2 class="account-heading" style = "color:#1877f2;" >Following Accounts</h2>
+                <p class="text-secondary" style = "color:#0095F6;" >{{users.total}} users</p>
+            </div>
+        </div>
+    </div>
+    {% for user in users.items %}
+        <article class= "media content-section">
+
+            <div class="account-info">
+                <img class="following-account-img" src="{{url_for('static', filename = 'profile_pics/' + user.image_file)}}" 
+                    style="height: 80px; width: 80px; border-radius: 50%;">
+                <div class="info">
+                    <a href ="{{url_for("users.user_posts", username = user.username)}}" style="text-decoration: none; color:black;" >
+                        <h2 class="account-heading">{{ user.username }}</h2></a>
+                    <p class="text-secondary">{{ user.email }}</p>
+                </div>
+            </div>
+
+        </article>  
+    {% endfor %}
+    <div class='pagination'>
+        
+        {% for page_num in users.iter_pages(left_edge=2, right_edge=2, left_current= 1, right_current= 2) %}
+            
+            {% if page_num %}
+                {% if users.page == page_num %}
+                    <a class = 'current-page-btn' href="{{ url_for('main.following_users', user_id=current_user.id, page=page_num)}}">{{ page_num }}</a>
+                {% else %}
+                    <a class = 'page-btn' href="{{ url_for('main.following_users', user_id=current_user.id, page=page_num)}}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                <a class = 'page-btn'>...</a>
+            {% endif %}
+            
+        {% endfor %}
+
+    </div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class = "content-section">
+        <form method="POST" action= "">
+            {{ form.hidden_tag() }}
+            <fieldset class= "form-group" >
+                <h4>Log In</h4>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Email</label>
+                    {% if form.email.errors %}
+                        {{ form.email( class= "is-invalid") }}
+                        <div class= "invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}                     
+                        </div>
+
+                    {% else %}
+                        <input class="form-control" id="email" name="email" placeholder="type your email">
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="password">Password</label>
+                    {% if form.password.errors %}
+                        {{ form.password( class= "is-invalid") }}
+                        <div class= "invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}                     
+                        </div>
+
+                    {% else %}
+                        <input class="form-control" id="password" name="password" placeholder="type your password">
+                    {% endif %}
+                </div>
+                <div class= "form-check">
+                    {{ form.remember(class="form-check-input")}}
+                    {{ form.remember.label(class="form-check-label")}}
+                </div>
+            </fieldset>
+            <div class="login_button">
+                <button type="submit" class="submit">Log In</button>
+                <a href="{{url_for('users.reset_request')}}">Forgot your password?</a>
+            </div>
+            
+        </form>        
+    </div>
+    <div class="to_login_in">
+        <small class="text">
+            <p>New to Veggy?</p> 
+            <a class ="ml-2" href="{{ url_for('users.signup') }}"> Sign Up</a>
+        </small>
+    </div>
+{% endblock content %}

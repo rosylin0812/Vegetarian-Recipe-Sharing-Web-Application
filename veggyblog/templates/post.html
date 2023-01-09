@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+    
+    <article class= "media content-section">
+        <div class = "top">
+            <div class="media-body">
+                <img src="{{ url_for('static', filename= 'profile_pics/' + post.author.image_file) }}">
+                <div class="article-metadata">
+                    <a class= "mr-2" href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
+                    <small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small>
+                </div>
+            </div>
+            <div class ="save-button">
+                {% if current_user.is_authenticated %}
+                    {% if current_user.has_saved_post(post) %}
+                    <a href="{{ url_for('main.unsave', post_id=post.id) }}"  method= "POST">
+                        <img src = "/static/images/saved_post.png"></a>
+                    {% else %}
+                    <a href="{{ url_for('main.save', post_id=post.id) }}"  method= "POST">
+                        <img src = "/static/images/save_post.png"></a>
+                    {% endif %}
+
+                {% endif %}
+            </div>
+        </div>
+
+        
+
+
+        <h2><a class="article-title"> {{post.title}} </a></h2>
+        <p class="article-content">{{post.content}}</p>
+        {% if post.author == current_user %}
+            <div>
+                <a class = "update-post" href = "{{ url_for('posts.update_post', post_id = post.id)}}">Edit</a>
+                <button type = "button" class="delete-post" onclick="document.getElementById('deleteModal').style.display='block'">Delete</button>
+            </div>    
+        {% endif %}
+    </article>
+    <!-- Modal -->
+    <div id="deleteModal" class="deletemodal">
+        <span onclick="document.getElementById('deleteModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <div class="modal-content">
+            <div class="delete-container">
+                <div class="text">
+                    <h1>Delete Post?</h1>
+                    <p>This post will be permanently removed once you click 'Delete'.</p>
+                </div>
+                <div class="modal-btn">
+                    <button type="button" class="cancelbtn" onclick="document.getElementById('deleteModal').style.display='none'">Cancel</button>
+                    <form action= "{{url_for('posts.delete_post', post_id = post.id)}}" method="POST">
+                        <input class="deletebtn" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

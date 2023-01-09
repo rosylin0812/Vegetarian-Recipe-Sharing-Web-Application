@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if current_user.is_authenticated %}
+    <div class="heading">
+        <div class="info">
+            <h2 class="account-heading" style = "color:#896b00;" >Your Saved Posts</h2>
+            <p class="text-secondary" style = "color:#a18400;" >{{posts.total}} posts</p>
+        </div>
+    </div>
+    {% endif %}
+    {% for post in posts.items %}
+        <article class= "media content-section">
+            
+                <div class="media-body">
+                    <img src="{{ url_for('static', filename= 'profile_pics/' + post.author.image_file) }}">
+                    <div class="article-metadata">
+                        <a class= "mr-2" href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
+                        <small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small>
+                    </div>
+                </div>
+
+                <h2><a class="article-title" href="{{url_for('posts.post', post_id = post.id)}}"> {{post.title}} </a></h2>
+                <a class="article-content">{{post.content}}</a>
+
+        </article>  
+    {% endfor %}
+
+    <div class='pagination'>
+        <!--{% if posts.has_prev %}
+            <button href="{{posts.prev()}}"><</a>
+        {% endif %}-->
+        {% for page_num in posts.iter_pages(left_edge=2, right_edge=2, left_current= 1, right_current= 2) %}
+            
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                    <a class = 'current-page-btn' style = "background-color:#887638f1;" href="{{ url_for('main.saved', page=page_num, user_id = current_user.id)}}">
+                        {{ page_num }}</a>
+                {% else %}
+                    <a class = 'page-btn' href="{{ url_for('main.saved', page=page_num, user_id = current_user.id)}}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                <a class = 'page-btn'>...</a>
+            {% endif %}
+            
+        {% endfor %}
+        <!--<a href="{{url_for('main.home', posts=posts.next(error_out=False))}}">></a>-->
+    </div>
+{% endblock content %}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" type = "text/css" href= "{{url_for('static', filename= 'style.css') }}">
+    {% if title == 'About' %}
+        <title> About Veggy </title>
+    {% else %}
+        <title> Veggy </title>
+    {% endif %}
+        
+    </head>
+<body>
+    <header>
+        <img src= "/static/images/logo.png" class="logo">
+        <nav>
+            <form class= "search-box" method = "POST" action = "/home" >
+                <img src = "/static/images/search.png"> 
+                {% if legend == 'search' %}
+                    <input type = "text" name="search" id="search" value = '{{ request.form['search'] }}'>
+                {% else %}
+                    <input type = "text" name="search" id="search" placeholder= "search articles">
+                {% endif %}
+            </form>
+        </nav>
+        <nav-right>
+            {% if current_user.is_authenticated %}
+                <div class='account-btn'>
+                    <div class = 'account-dropdown'>
+                        <button onclick="accountDropDown()" class='account'>
+                            <img class="account-img" src="{{url_for('static', filename = 'profile_pics/' + current_user.image_file)}}"
+                             style ="width:40px;height:40px;margin-left:5px;">{{current_user.username}}
+                            <img src="/static/images/down-arrow.png" style ="margin:0 12px;">
+                        </button>
+
+                        <div id="account-dropdown" class="account-dropdown-content">
+                            <br>
+                            <a class="account" href="{{ url_for('users.account') }}">Account</a>
+                            <a class="logout" href="{{ url_for('users.logout') }}">Log out</a>
+                            <br>
+                            <div class="p-footer-row-opposite">
+                                <div class ="p-footer-linkList">
+                                    
+                                    <li><a href="/privacy-policy">Privacy</a></li>
+                                    <li><a>&#8226;</a></li>
+                                    <li><a href="/terms">Terms</a></li>
+                                    <li><a>&#8226;</a></li>
+                                    <li><a href="/about-us-veggy/">About us</a>
+                                  
+                                </div>
+                                <a class= "copyright" style = "display: flex;justify-content: center;
+                                font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                                color: #9a9a9a;">Veggie © 2022-2023</a>
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <script>
+                            // When the user clicks on the button, toggle between hiding and showing the dropdown content
+                            function accountDropDown() {
+                              document.getElementById("account-dropdown").classList.toggle("show");
+                            }
+                            
+                            // Close the dropdown if the user clicks outside of it
+                            window.onclick = function(event) {
+                              if (!event.target.matches('.account')) {
+                                var dropdowns = document.getElementsByClassName("account-dropdown-content");
+                                var i;
+                                for (i = 0; i < dropdowns.length; i++) {
+                                  var openDropdown = dropdowns[i];
+                                  if (openDropdown.classList.contains('show')) {
+                                    openDropdown.classList.remove('show');
+                                  }
+                                }
+                              }
+                            }
+                        </script>
+                    </div>
+                </div>
+
+
+
+            {% else%}
+                <a href= "{{ url_for('users.login') }}"> <button type= "button" class="login">Log in</button></a>
+                <a href= "{{ url_for('users.signup') }}"> <button type= "button" class="signup">Sing up</button> </a>
+            {% endif %}
+        </nav-right>
+    </header>
+    <div class="container">
+        <!----------- left sidebar ---------->
+        <div class="left-sidebar">
+            <div class= "imp-links">
+                <a href= {{ url_for("main.home") }}> <button> <img src="/static/images/home.png"> Home </button></a>
+                {% if current_user.is_authenticated %}
+                    <a href= {{ url_for("posts.new_post") }}><button> <img src="/static/images/post.png"> Post </button></a>
+                    <a href= {{ url_for("main.saved", user_id = current_user.id) }}><button> <img src="/static/images/save.png"> Saved </button></a>
+                    <a href= {{ url_for("main.following_users", user_id = current_user.id)}}><button> <img src="/static/images/follows.png"> Follows </button></a>
+
+                {% else%}
+                    <a href= {{ url_for("posts.new_post") }}><button> <img src="/static/images/post.png"> Post </button></a>
+                    <a href= {{ url_for('users.login') }}><button> <img src="/static/images/save.png"> Saved </button></a>
+                    <a href= {{ url_for('users.login') }}><button> <img src="/static/images/follows.png"> Follows </button></a>
+
+                {% endif %}
+            </div>
+        </div>
+        <!----------- main content ------- -->
+    
+        <div class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+
+                    {% for category, message in messages %}
+                        {% if category == 'success' or category == 'info' %}
+                            <div class = "alert_success">
+                                <a> {{ message }} </a>
+                            </div>
+                        {% elif category == 'danger' %}
+                            <div class = "alert_danger">
+                                <a> {{ message }} </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+        
+        <!----------- right-sidebar ------- -->
+        <div class="right-sidebar">
+    
+            <div class="sidebar-title"> 
+                <h4>Events</h4>
+                <a href= "https://www.google.com/search?q=vegan+events&oq=vegan+events&aqs=chrome..69i57j0i512j0i457i512j0i512l7.6416j0j15&sourceid=chrome&ie=UTF-8&ibp=htl;events&rciv=evn&sa=X&ved=2ahUKEwjyxYL61ZP8AhV5STABHZIoDHUQ8eoFKAJ6BAgREA8&sxsrf=ALiCzsb31LEn9sIYgnrtH0ybz7ZlmYuzhw:1671933582166#htivrt=events&htidocid=L2F1dGhvcml0eS9ob3Jpem9uL2NsdXN0ZXJlZF9ldmVudC8yMDIzLTAxLTI4fDk0Mzc2NjMwOTUxNTk2Njc5NTc%3D&fpstate=tldetail"> 
+                    See All</a>
+                
+            </div>
+            <div class="event"> 
+                <div class= "left-event">
+                    <h3> 3 </h3>
+                    <span>Jan</span>
+                </div>
+
+                <div class= "right-event">
+                    <h3> Vegan New Years Potluck </h3>
+                    <p> 6400 Sugarloaf Pkwy, Duluth, GA </p>
+                    <p> Tue, Jan 3, 5 – 7 PM </p>
+                    <a href= "https://www.eventbrite.com/e/vegan-new-years-potluck-tickets-491148738097"> More Info </a>
+                </div>
+            </div>
+            <div class="event"> 
+                <div class= "left-event">
+                    <h3> 17 </h3>
+                    <span>Jan</span>
+                </div>
+
+                <div class= "right-event">
+                    <h3> Taco Tuesday’s R Day Party at Bar Vegan in Ponce City Market </h4>
+                    <p> 675 Ponce De Leon Ave NE Suite N-215, Atlanta, GA </p>
+                    <p> Tue, Jan 10, 12 – 9 PM </p>
+                    <a href= "https://allevents.in/atlanta/taco-tuesday%E2%80%99s-randb-day-party-at-bar-vegan-in-ponce-city-market/10000172277946977"> More Info </a>
+                </div>
+            </div>
+            <div class="event"> 
+                <div class= "left-event">
+                    <h3> 28 </h3>
+                    <span>Jan</span>
+                </div>
+
+                <div class= "right-event">
+                    <h3> VEGAN BBQ in Atlanta </h4>
+                    <p> Gwinnett County Fairgrounds
+                        2405 Sugarloaf Pkwy, Lawrenceville, GA </p>
+                    <p> Sat, Jan 28, 3 – 11 PM </p>
+                    <a href= "https://allevents.in/lawrenceville/vegan-bbq-in-atlanta/200023675064912?ref=footer-up-ep-upcoming"> More Info </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+
+
+</body>
+
+</html>
+
